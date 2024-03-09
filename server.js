@@ -5,11 +5,24 @@ const express = require("express");
 const app = express();
 const  bodyParser = require('body-parser')
 app.use(cors());
+
+function isValidUrl(url) {
+  try {
+    new URL(url);
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
 async function scrapeWebpage(url) {
   try {
+    if (!isValidUrl(url)) {
+      return res.status(400).json({ error: "Invalid URL provided" });
+    }
     const response = await axios.get(url);
+    
     const html = response.data;
-
+     
     const $ = cheerio.load(html);
 
     const Problemsolved = [];
