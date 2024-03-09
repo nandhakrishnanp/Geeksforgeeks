@@ -6,20 +6,17 @@ const app = express();
 const  bodyParser = require('body-parser')
 app.use(cors());
 
-function isValidUrl(url) {
-  try {
-    new URL(url);
-    return true;
-  } catch (error) {
-    return false;
-  }
-}
+
+
 async function scrapeWebpage(url) {
   try {
-    if (!isValidUrl(url)) {
-      return res.status(400).json({ error: "Invalid URL provided" });
-    }
-    const response = await axios.get(url);
+    
+   
+      const response = await axios.get(url);
+    
+     
+   
+      
     
     const html = response.data;
      
@@ -67,8 +64,14 @@ async function scrapeWebpage(url) {
     };
 
     return resultData;
-  } catch (error) {
-    console.error("Error fetching or parsing the webpage:", error);
+  }
+  
+  catch (error) {
+    console.log(error);
+   const resultData = {
+      err: 500
+    }
+    return resultData
   }
 }
 
