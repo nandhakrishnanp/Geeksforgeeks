@@ -65,7 +65,7 @@ async function scrapeWebpage(url) {
   }
   
   catch (error) {
-   console.log("error found");
+   console.log("error found  !! ");
    const resultData = {
       err: 500
     }
@@ -85,7 +85,7 @@ app.post("/", async (req, res) => {
   const URL = req.body.url;
   const Data = await scrapeWebpage(URL)
 
-  console.log(Data);
+  console.log( "Data sent -"+Data);
 
   res.json(Data)
 });
