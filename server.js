@@ -13,15 +13,7 @@ async function scrapeWebpage(url) {
     
    
       const response = await axios.get(url);
-     
-     
-      if(!response.ok){
-        const resultData = {
-          err: 500
-        }
-        return resultData
-
-      }
+   
       
     
     const html = response.data;
