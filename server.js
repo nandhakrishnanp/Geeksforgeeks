@@ -13,9 +13,15 @@ async function scrapeWebpage(url) {
     
    
       const response = await axios.get(url);
-    
      
-   
+     
+      if(!response.ok){
+        const resultData = {
+          err: 500
+        }
+        return resultData
+
+      }
       
     
     const html = response.data;
@@ -67,7 +73,7 @@ async function scrapeWebpage(url) {
   }
   
   catch (error) {
-    console.log(error);
+   console.log("error found");
    const resultData = {
       err: 500
     }
@@ -81,6 +87,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.get("/", (req, res) => {
   res.json({ Response: "Connected" });
 });
+
 
 app.post("/", async (req, res) => {
   const URL = req.body.url;
